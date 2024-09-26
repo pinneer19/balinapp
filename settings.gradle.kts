@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "BalinApp"
 include(":app")
- 
+include(":domain")
+include(":data")
