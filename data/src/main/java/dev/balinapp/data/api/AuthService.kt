@@ -1,7 +1,7 @@
 package dev.balinapp.data.api
 
-import dev.balinapp.data.model.AuthDataDto
-import dev.balinapp.data.model.AuthResponse
+import dev.balinapp.data.model.auth.AuthDataDto
+import dev.balinapp.data.model.auth.AuthResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

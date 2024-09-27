@@ -2,9 +2,9 @@ package dev.balinapp.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.balinapp.domain.model.AuthResult
-import dev.balinapp.domain.model.LoginInputValidationType
-import dev.balinapp.domain.model.RegisterInputValidationType
+import dev.balinapp.domain.model.auth.AuthResult
+import dev.balinapp.domain.model.auth.LoginInputValidationType
+import dev.balinapp.domain.model.auth.RegisterInputValidationType
 import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.domain.usecase.LoginUserUseCase
 import dev.balinapp.domain.usecase.RegisterUserUseCase

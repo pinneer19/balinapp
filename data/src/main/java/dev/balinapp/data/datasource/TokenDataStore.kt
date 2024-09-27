@@ -1,10 +1,13 @@
 package dev.balinapp.data.datasource
 
 import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -20,6 +23,10 @@ class TokenDataStore @Inject constructor(
         dataStore.edit { preferences ->
             preferences[tokenKey] = token
         }
+    }
+
+    suspend fun getToken(): String {
+        return tokenFlow.first()
     }
 
     companion object {

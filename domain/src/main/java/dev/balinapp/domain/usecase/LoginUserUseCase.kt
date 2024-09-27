@@ -1,7 +1,7 @@
 package dev.balinapp.domain.usecase
 
-import dev.balinapp.domain.model.AuthData
-import dev.balinapp.domain.model.AuthResult
+import dev.balinapp.domain.model.auth.AuthData
+import dev.balinapp.domain.model.auth.AuthResult
 import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.domain.repository.AuthRepository
 import javax.inject.Inject

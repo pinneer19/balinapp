@@ -1,6 +1,8 @@
 <resources>
     <style name="Base.Theme.BalinApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorOnPrimary">@color/white</item>
     </style>
     <style name="Theme.BalinApp" parent="Base.Theme.BalinApp"/>
 </resources>

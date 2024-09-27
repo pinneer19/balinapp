@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav.xml"
+    app:startDestination="@id/photoFragment">
+
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="dev.balinapp.ui.main.PhotoFragment"
+        android:label="PhotoFragment" />
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="dev.balinapp.ui.main.MapFragment"
+        android:label="MapFragment" />
+</navigation>

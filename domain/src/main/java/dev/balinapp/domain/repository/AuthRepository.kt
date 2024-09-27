@@ -1,7 +1,7 @@
 package dev.balinapp.domain.repository
 
-import dev.balinapp.domain.model.AuthData
-import dev.balinapp.domain.model.AuthResult
+import dev.balinapp.domain.model.auth.AuthData
+import dev.balinapp.domain.model.auth.AuthResult
 import dev.balinapp.domain.model.RequestResult
 
 interface AuthRepository {

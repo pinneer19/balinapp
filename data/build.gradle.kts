@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.google.ksp)
     kotlin("kapt")
 }
 
@@ -49,4 +50,11 @@ dependencies {
     kapt(libs.dagger.compiler)
 
     api(libs.androidx.datastore.preferences)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.paging.runtime)
+    api(libs.androidx.room.paging)
 }

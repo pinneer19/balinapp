@@ -1,7 +1,7 @@
-package dev.balinapp.data.mapper
+package dev.balinapp.data.mapper.auth
 
-import dev.balinapp.data.model.AuthDataDto
-import dev.balinapp.domain.model.AuthData
+import dev.balinapp.data.model.auth.AuthDataDto
+import dev.balinapp.domain.model.auth.AuthData
 
 fun AuthData.toAuthDataDto(): AuthDataDto = with(this) {
     AuthDataDto(

@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.balinapp.ui.auth.AuthViewModel
 import dev.balinapp.ui.auth.TokenViewModel
+import dev.balinapp.ui.main.MainViewModel
 
 @Module
 interface ViewModelModule {
@@ -17,4 +18,8 @@ interface ViewModelModule {
     @Binds
     @[IntoMap ViewModelKey(AuthViewModel::class)]
     fun bindAuthViewModel(authViewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @[IntoMap ViewModelKey(MainViewModel::class)]
+    fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 }

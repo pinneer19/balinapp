@@ -1,11 +1,11 @@
 package dev.balinapp.data.repository
 
-import dev.balinapp.data.mapper.toAuthDataDto
-import dev.balinapp.data.mapper.toAuthResult
+import dev.balinapp.data.mapper.auth.toAuthDataDto
+import dev.balinapp.data.mapper.auth.toAuthResult
 import dev.balinapp.data.mapper.toRequestResult
 import dev.balinapp.data.api.AuthService
-import dev.balinapp.domain.model.AuthData
-import dev.balinapp.domain.model.AuthResult
+import dev.balinapp.domain.model.auth.AuthData
+import dev.balinapp.domain.model.auth.AuthResult
 import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.domain.model.map
 import dev.balinapp.domain.repository.AuthRepository

@@ -1,4 +1,4 @@
-package dev.balinapp.data.model
+package dev.balinapp.data.model.auth
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

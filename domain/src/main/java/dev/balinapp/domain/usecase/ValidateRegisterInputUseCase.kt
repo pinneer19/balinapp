@@ -1,6 +1,6 @@
 package dev.balinapp.domain.usecase
 
-import dev.balinapp.domain.model.RegisterInputValidationType
+import dev.balinapp.domain.model.auth.RegisterInputValidationType
 import javax.inject.Inject
 
 class ValidateRegisterInputUseCase @Inject constructor() {

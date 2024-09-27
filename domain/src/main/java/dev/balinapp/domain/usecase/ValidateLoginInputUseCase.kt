@@ -1,6 +1,6 @@
 package dev.balinapp.domain.usecase
 
-import dev.balinapp.domain.model.LoginInputValidationType
+import dev.balinapp.domain.model.auth.LoginInputValidationType
 import javax.inject.Inject
 
 class ValidateLoginInputUseCase @Inject constructor() {

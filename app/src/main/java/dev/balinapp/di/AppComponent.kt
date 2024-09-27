@@ -8,9 +8,10 @@ import dev.balinapp.data.di.DataModule
 import dev.balinapp.ui.auth.AuthFragment
 import dev.balinapp.ui.auth.LoginFragment
 import dev.balinapp.ui.auth.RegisterFragment
+import dev.balinapp.ui.main.MainFragment
 import javax.inject.Singleton
 
-@Component(modules = [DataModule::class, ViewModelModule::class])
+@Component(modules = [DataModule::class, ViewModelModule::class, AppServiceModule::class])
 @Singleton
 interface AppComponent {
 
@@ -21,6 +22,8 @@ interface AppComponent {
     fun inject(loginFragment: LoginFragment)
 
     fun inject(registerFragment: RegisterFragment)
+
+    fun inject(mainFragment: MainFragment)
 
     @Component.Factory
     interface Factory {

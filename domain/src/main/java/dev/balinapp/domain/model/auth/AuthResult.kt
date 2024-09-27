@@ -1,4 +1,4 @@
-package dev.balinapp.domain.model
+package dev.balinapp.domain.model.auth
 
 data class AuthResult(
     val userId: Int,
