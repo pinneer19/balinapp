@@ -13,7 +13,7 @@ import dev.balinapp.util.toDateString
 
 class ImageAdapter(
     private val onItemClick: (Int, String, Long) -> Unit,
-    private val onLongItemClick: (Int) -> Unit
+    private val onItemLongClick: (Int) -> Unit
 ) : PagingDataAdapter<ImageOutput, ImageAdapter.ViewHolder>(ImageDiffUtilCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -24,7 +24,7 @@ class ImageAdapter(
             }
 
             root.setOnLongClickListener {
-                onLongItemClick(image.id)
+                onItemLongClick(image.id)
                 true
             }
 

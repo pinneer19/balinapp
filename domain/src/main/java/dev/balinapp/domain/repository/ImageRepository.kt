@@ -11,4 +11,6 @@ interface ImageRepository {
     suspend fun deleteImage(imageId: Int): RequestResult<ImageOutput>
 
     suspend fun getImageById(id: Int): ImageOutput
+
+    suspend fun getImages(): List<ImageOutput>
 }

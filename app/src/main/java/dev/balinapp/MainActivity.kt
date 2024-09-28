@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupMapKit() {
         MapKitFactory.setApiKey(BuildConfig.MAP_API_KEY)
         MapKitFactory.initialize(this)
+        MapKitFactory.getInstance().onStart()
     }
 
     private fun setupSystemBars() {
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        super.onStop()
         MapKitFactory.getInstance().onStop()
+        super.onStop()
     }
 }

@@ -11,6 +11,7 @@ import dev.balinapp.ui.auth.RegisterFragment
 import dev.balinapp.ui.comments.CommentFragment
 import dev.balinapp.ui.images.ImageFragment
 import dev.balinapp.ui.main.MainFragment
+import dev.balinapp.ui.map.MapFragment
 import javax.inject.Singleton
 
 @Component(modules = [DataModule::class, ViewModelModule::class, AppServiceModule::class])
@@ -30,6 +31,8 @@ interface AppComponent {
     fun inject(imageFragment: ImageFragment)
 
     fun inject(commentFragment: CommentFragment)
+
+    fun inject(mapFragment: MapFragment)
 
     @Component.Factory
     interface Factory {

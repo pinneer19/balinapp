@@ -52,7 +52,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupAuthPager()
         observeAuthState()
         observeErrorState()
@@ -62,7 +61,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 authViewModel.authData.collect { requestResult ->
-
                     when (requestResult) {
                         is RequestResult.InProgress -> updateLoadingVisibility(true)
 

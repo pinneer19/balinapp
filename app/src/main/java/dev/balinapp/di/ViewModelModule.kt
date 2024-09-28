@@ -9,6 +9,7 @@ import dev.balinapp.ui.auth.TokenViewModel
 import dev.balinapp.ui.comments.CommentViewModel
 import dev.balinapp.ui.images.ImageViewModel
 import dev.balinapp.ui.main.MainViewModel
+import dev.balinapp.ui.map.MapViewModel
 
 @Module
 interface ViewModelModule {
@@ -32,4 +33,8 @@ interface ViewModelModule {
     @Binds
     @[IntoMap ViewModelKey(CommentViewModel::class)]
     fun bindCommentViewModel(commentViewModel: CommentViewModel): ViewModel
+
+    @Binds
+    @[IntoMap ViewModelKey(MapViewModel::class)]
+    fun bindMapViewModel(mapViewModel: MapViewModel): ViewModel
 }

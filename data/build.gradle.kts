@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.retrofit.adapters.result)
 
     implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     api(libs.dagger)
     kapt(libs.dagger.compiler)

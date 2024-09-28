@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,7 +17,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.yandex.mapkit.MapKitFactory
 import dev.balinapp.BalinApp
 import dev.balinapp.R
 import dev.balinapp.databinding.FragmentMainBinding
@@ -27,6 +25,7 @@ import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.util.CameraManager
 import dev.balinapp.util.ImageProcessor
 import dev.balinapp.util.PermissionsManager
+import dev.balinapp.util.gpsEnabled
 import dev.balinapp.util.showToast
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -102,20 +101,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             if (!permissionsManager.hasLocationPermissions(requireContext())) {
                 permissionsManager.requestLocationPermissions()
             } else if (gpsEnabled()) {
-                MapKitFactory.getInstance().onStart()
                 startCamera()
             } else {
                 showToast(message = getString(R.string.enable_gps))
                 return@setOnClickListener
             }
         }
-    }
-
-    private fun gpsEnabled(): Boolean {
-        val locationManager =
-            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
     private fun startCamera() = with(cameraManager) {

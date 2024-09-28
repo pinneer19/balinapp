@@ -8,7 +8,6 @@ import dev.balinapp.domain.model.image.ImageInput
 import dev.balinapp.domain.model.image.ImageOutput
 import dev.balinapp.domain.usecase.UploadImageUseCase
 import dev.balinapp.util.LocationClient
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -35,14 +34,12 @@ class MainViewModel @Inject constructor(
 
     private var _location = MutableStateFlow<Location?>(null)
 
-    private var locationJob: Job? = null
-
     init {
         observerLocationStatus()
     }
 
     private fun observerLocationStatus() {
-        locationJob = viewModelScope.launch {
+        viewModelScope.launch {
             locationClient.getLocation(15_000L).collect {
                 _location.emit(it)
             }

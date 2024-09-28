@@ -16,6 +16,7 @@ import dev.balinapp.R
 import dev.balinapp.databinding.FragmentImageBinding
 import dev.balinapp.di.ViewModelFactory
 import dev.balinapp.domain.model.RequestResult
+import dev.balinapp.util.showConfirmationDialog
 import dev.balinapp.util.showToast
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -58,8 +59,14 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
                     ImageFragmentDirections.actionImageFragmentToCommentFragment(id, url, date)
                 findNavController().navigate(action)
             },
-            onLongItemClick = { imageId ->
-                showDeleteConfirmationDialog(imageId)
+            onItemLongClick = { imageId ->
+                showConfirmationDialog(
+                    title = getString(R.string.delete_image),
+                    approvalMessage = getString(R.string.delete_image_approval),
+                    confirmButtonText = getString(R.string.delete)
+                ) {
+                    imageViewModel.deleteImage(imageId)
+                }
             }
         )
 
@@ -67,22 +74,6 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
 
         observeImages(adapter)
     }
-
-    private fun showDeleteConfirmationDialog(imageId: Int) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.delete_image))
-            .setMessage(getString(R.string.delete_image_approval))
-            .setPositiveButton(getString(R.string.delete)) { dialog, _ ->
-                imageViewModel.deleteImage(imageId)
-                dialog.dismiss()
-            }
-            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
-    }
-
 
     private fun observeRequestState() {
         lifecycleScope.launch {

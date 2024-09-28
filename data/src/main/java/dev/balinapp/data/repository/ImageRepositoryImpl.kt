@@ -7,7 +7,6 @@ import dev.balinapp.data.mapper.image.toImageEntity
 import dev.balinapp.data.mapper.image.toImageOutput
 import dev.balinapp.data.mapper.toRequestResult
 import dev.balinapp.domain.model.RequestResult
-import dev.balinapp.domain.model.RequestResult.Idle.data
 import dev.balinapp.domain.model.image.ImageInput
 import dev.balinapp.domain.model.image.ImageOutput
 import dev.balinapp.domain.model.map
@@ -40,15 +39,17 @@ class ImageRepositoryImpl @Inject constructor(
 
 
         if (apiResult is RequestResult.Success) {
-            println("hi")
             imageDao.deleteImage(imageDao.getImageById(imageId))
         }
-        println("not hi")
 
         return apiResult
     }
 
     override suspend fun getImageById(id: Int): ImageOutput {
         return imageDao.getImageById(id).toImageOutput()
+    }
+
+    override suspend fun getImages(): List<ImageOutput> {
+        return imageDao.getImages().map { it.toImageOutput() }
     }
 }

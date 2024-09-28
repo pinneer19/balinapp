@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "comments")
-data class CommentEntity(
+data class  CommentEntity(
     @PrimaryKey
     @ColumnInfo("id") val id: Int,
     @ColumnInfo("date") val date: Long,
