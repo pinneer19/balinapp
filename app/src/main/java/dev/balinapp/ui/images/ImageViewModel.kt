@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import dev.balinapp.data.datasource.ImagePagingSource
+import dev.balinapp.data.datasource.image.ImagePagingSource
 import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.domain.model.image.ImageOutput
 import dev.balinapp.domain.usecase.DeleteImageUseCase

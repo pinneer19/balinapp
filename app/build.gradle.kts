@@ -66,17 +66,12 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
     kapt(libs.dagger.compiler)
 
     implementation(libs.play.services.location)
+    implementation(libs.maps.mobile)
 
     implementation(libs.kotlinx.datetime)
 
     implementation(libs.glide)
-
-    implementation(libs.maps.mobile)
 }

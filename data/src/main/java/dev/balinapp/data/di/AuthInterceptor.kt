@@ -1,6 +1,6 @@
 package dev.balinapp.data.di
 
-import dev.balinapp.data.datasource.TokenDataStore
+import dev.balinapp.data.datasource.token.TokenDataStore
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,4 +1,4 @@
-package dev.balinapp.data.datasource
+package dev.balinapp.data.datasource.comment
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager

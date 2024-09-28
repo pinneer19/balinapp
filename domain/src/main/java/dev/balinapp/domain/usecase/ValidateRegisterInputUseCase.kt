@@ -11,10 +11,15 @@ class ValidateRegisterInputUseCase @Inject constructor() {
     ): RegisterInputValidationType {
         return when {
             login.isEmpty() || password.isEmpty() -> RegisterInputValidationType.EmptyField
+
             login.length !in 4..32 -> RegisterInputValidationType.TooShortLogin
+
             !Regex("[a-z0-9_\\-.@]+").containsMatchIn(login) -> RegisterInputValidationType.LoginPatternMismatch
+
             password.length !in 8..500 -> RegisterInputValidationType.TooShortPassword
+
             password != repeatedPassword -> RegisterInputValidationType.PasswordsAreNotTheSame
+
             else -> RegisterInputValidationType.Valid
         }
     }

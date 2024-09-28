@@ -10,9 +10,13 @@ class ValidateLoginInputUseCase @Inject constructor() {
     ): LoginInputValidationType {
         return when {
             login.isEmpty() || password.isEmpty() -> LoginInputValidationType.EmptyField
+
             login.length !in 4..32 -> LoginInputValidationType.TooShortLogin
+
             !Regex("[a-z0-9_\\-.@]+").containsMatchIn(login) -> LoginInputValidationType.LoginPatternMismatch
+
             password.length !in 8..500 -> LoginInputValidationType.TooShortPassword
+
             else -> LoginInputValidationType.Valid
         }
     }

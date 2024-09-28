@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -81,9 +80,15 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
                 when (requestResult) {
                     is RequestResult.InProgress -> toggleLoadingVisibility(true)
 
-                    is RequestResult.Success -> showToast(getString(R.string.image_delete_success))
+                    is RequestResult.Success -> {
+                        showToast(getString(R.string.image_delete_success))
+                        toggleLoadingVisibility(false)
+                    }
 
-                    is RequestResult.Error -> showToast(getString(R.string.image_delete_error))
+                    is RequestResult.Error -> {
+                        showToast(getString(R.string.image_delete_error))
+                        toggleLoadingVisibility(false)
+                    }
 
                     else -> {}
                 }

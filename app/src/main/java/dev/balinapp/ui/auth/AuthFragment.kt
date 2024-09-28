@@ -19,6 +19,7 @@ import dev.balinapp.R
 import dev.balinapp.databinding.FragmentAuthBinding
 import dev.balinapp.di.ViewModelFactory
 import dev.balinapp.domain.model.RequestResult
+import dev.balinapp.domain.model.auth.AuthResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -61,27 +62,27 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 authViewModel.authData.collect { requestResult ->
-                    when (requestResult) {
-                        is RequestResult.InProgress -> updateLoadingVisibility(true)
-
-                        is RequestResult.Success -> {
-                            tokenViewModel.saveToken(requestResult.data.token)
-
-                            updateLoadingVisibility(false)
-                        }
-
-                        is RequestResult.Error -> {
-                            requestResult.error?.let {
-                                showToast(it.message.toString())
-                            } ?: showToast(INVALID_INPUT)
-
-                            updateLoadingVisibility(false)
-                        }
-
-                        RequestResult.Idle -> {}
-                    }
+                    handleAuthState(requestResult)
                 }
             }
+        }
+    }
+
+    private fun handleAuthState(requestResult: RequestResult<AuthResult>) {
+        when (requestResult) {
+            is RequestResult.InProgress -> updateLoadingVisibility(true)
+
+            is RequestResult.Success -> {
+                tokenViewModel.saveToken(requestResult.data.token)
+                updateLoadingVisibility(false)
+            }
+
+            is RequestResult.Error -> {
+                showToast(requestResult.error?.message ?: INVALID_INPUT)
+                updateLoadingVisibility(false)
+            }
+
+            RequestResult.Idle -> {}
         }
     }
 

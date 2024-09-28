@@ -77,12 +77,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         permissionsManager = PermissionsManager(
             fragment = this,
-            onPermissionDenied = { showToast(getString(R.string.location_permission_not_granted)) }
+            onPermissionDenied = {
+                showToast(getString(R.string.location_permission_not_granted))
+            }
         )
 
         setupFloatingActionButton()
         configureMenuVisibility()
         setupMenuListener()
+
         observeMenuVisibility()
         observeMenuItemState()
         observeRequestState()
@@ -249,13 +252,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     is RequestResult.InProgress -> updateLoadingVisibility(true)
 
                     is RequestResult.Success -> {
-                        updateLoadingVisibility(false)
                         showToast(getString(R.string.image_upload_success))
+                        updateLoadingVisibility(false)
                     }
 
                     is RequestResult.Error -> {
-                        updateLoadingVisibility(false)
                         showToast(state.error?.message ?: getString(R.string.upload_photo_error))
+                        updateLoadingVisibility(false)
                     }
 
                     RequestResult.Idle -> {}

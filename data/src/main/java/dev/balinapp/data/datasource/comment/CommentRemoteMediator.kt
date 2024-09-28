@@ -1,29 +1,28 @@
-package dev.balinapp.data.datasource
+package dev.balinapp.data.datasource.comment
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import dev.balinapp.data.api.ImageService
+import dev.balinapp.data.api.CommentService
 import dev.balinapp.data.db.AppDatabase
-import dev.balinapp.data.db.dao.ImageDao
-import dev.balinapp.data.db.entity.ImageEntity
-import dev.balinapp.data.mapper.image.toImageEntity
-import dev.balinapp.domain.model.RequestResult.Idle.data
+import dev.balinapp.data.db.entity.CommentEntity
+import dev.balinapp.data.mapper.comment.toCommentEntity
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class ImageRemoteMediator @Inject constructor(
+class CommentRemoteMediator @Inject constructor(
+    private val imageId: Int,
     private val db: AppDatabase,
-    private val imageService: ImageService
-) : RemoteMediator<Int, ImageEntity>() {
+    private val commentService: CommentService
+) : RemoteMediator<Int, CommentEntity>() {
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, ImageEntity>
+        state: PagingState<Int, CommentEntity>
     ): MediatorResult {
         return try {
             val page = when (loadType) {
@@ -37,20 +36,20 @@ class ImageRemoteMediator @Inject constructor(
                 }
             } ?: DEFAULT_PAGE
 
-            val response = imageService.getImages(page = page)
-            val imageEntities = response.getOrNull()?.data?.map { dto -> dto.toImageEntity() }
+            val response = commentService.getComments(imageId = imageId, page = page)
 
-            imageEntities?.let {
+            val commentEntities = response.getOrNull()?.data?.map { dto -> dto.toCommentEntity() }
+            commentEntities?.let {
                 db.withTransaction {
                     if (loadType == LoadType.REFRESH) {
-                        db.imageDao().clearAll()
+                        db.commentDao().clearAll()
                     }
-                    db.imageDao().insertAll(it)
+                    db.commentDao().insertAll(it)
                 }
             }
 
             MediatorResult.Success(
-                endOfPaginationReached = imageEntities.isNullOrEmpty()
+                endOfPaginationReached = commentEntities.isNullOrEmpty()
             )
         } catch (e: IOException) {
             MediatorResult.Error(e)

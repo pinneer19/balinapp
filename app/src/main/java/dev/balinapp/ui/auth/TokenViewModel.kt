@@ -2,7 +2,7 @@ package dev.balinapp.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.balinapp.data.datasource.TokenDataStore
+import dev.balinapp.data.datasource.token.TokenDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch

@@ -6,7 +6,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import dev.balinapp.data.db.entity.ImageEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ImageDao {

@@ -1,5 +1,3 @@
-import java.net.URI
-
 pluginManagement {
     repositories {
         google {
@@ -22,6 +20,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "BalinApp"
+
 include(":app")
 include(":domain")
 include(":data")

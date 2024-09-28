@@ -3,7 +3,7 @@ package dev.balinapp.ui.comments
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import dev.balinapp.data.datasource.CommentPagingSource
+import dev.balinapp.data.datasource.comment.CommentPagingSource
 import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.domain.model.comment.CommentOutput
 import dev.balinapp.domain.usecase.DeleteCommentUseCase

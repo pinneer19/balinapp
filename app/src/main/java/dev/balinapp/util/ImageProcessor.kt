@@ -13,10 +13,10 @@ object ImageProcessor {
             val inputStream = context.contentResolver.openInputStream(uri)
             val originalBitmap = BitmapFactory.decodeStream(inputStream)
 
-            val resizedBitmap = resizeImage(originalBitmap, 1280)
+            val resizedBitmap = resizeImage(originalBitmap)
 
             val compressedImage =
-                compressImage(resizedBitmap, maxFileSizeInBytes = 2 * 1024 * 1024)
+                compressImage(resizedBitmap)
 
             Base64.encodeToString(compressedImage, Base64.DEFAULT)
         } catch (e: Exception) {
@@ -25,7 +25,7 @@ object ImageProcessor {
         }
     }
 
-    private fun resizeImage(bitmap: Bitmap, maxSize: Int): Bitmap {
+    private fun resizeImage(bitmap: Bitmap, maxSize: Int = MAX_SIZE): Bitmap {
         val width = bitmap.width
         val height = bitmap.height
 
@@ -41,7 +41,7 @@ object ImageProcessor {
         return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
     }
 
-    private fun compressImage(bitmap: Bitmap, maxFileSizeInBytes: Int): ByteArray {
+    private fun compressImage(bitmap: Bitmap, maxFileSizeInBytes: Int = TWO_MB): ByteArray {
         val outputStream = ByteArrayOutputStream()
         var quality = 100
 
@@ -58,4 +58,7 @@ object ImageProcessor {
 
         return outputStream.toByteArray()
     }
+
+    private const val TWO_MB = 2 * 1024 * 1024
+    private const val MAX_SIZE = 1280
 }

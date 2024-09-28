@@ -29,12 +29,12 @@ class CommentFragment : Fragment(R.layout.fragment_comment) {
     private var _binding: FragmentCommentBinding? = null
     private val binding get() = _binding!!
 
-    private val commentsFragmentArgs: CommentFragmentArgs by navArgs()
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     private val commentViewModel by viewModels<CommentViewModel> { viewModelFactory }
+
+    private val commentsFragmentArgs: CommentFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
