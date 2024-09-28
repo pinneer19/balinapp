@@ -1,7 +1,5 @@
 package dev.balinapp.ui.main
 
-import dev.balinapp.util.CameraManager
-import dev.balinapp.util.PermissionsManager
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
@@ -13,17 +11,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.yandex.mapkit.MapKitFactory
 import dev.balinapp.BalinApp
 import dev.balinapp.R
 import dev.balinapp.databinding.FragmentMainBinding
 import dev.balinapp.di.ViewModelFactory
 import dev.balinapp.domain.model.RequestResult
+import dev.balinapp.util.CameraManager
 import dev.balinapp.util.ImageProcessor
+import dev.balinapp.util.PermissionsManager
 import dev.balinapp.util.showToast
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,6 +43,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var permissionsManager: PermissionsManager
     private lateinit var cameraManager: CameraManager
+
+    private val navController: NavController by lazy {
+        val navHostFragment =
+            childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
+
+        navHostFragment.navController
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -92,6 +102,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             if (!permissionsManager.hasLocationPermissions(requireContext())) {
                 permissionsManager.requestLocationPermissions()
             } else if (gpsEnabled()) {
+                MapKitFactory.getInstance().onStart()
                 startCamera()
             } else {
                 showToast(message = getString(R.string.enable_gps))
@@ -122,7 +133,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
 
             mainToolbar.setNavigationOnClickListener {
-                mainViewModel.toggleMenuVisibility()
+                when (mainViewModel.toolbarIconState.value) {
+                    ToolbarIcon.MENU -> {
+                        mainViewModel.toggleMenuVisibility()
+                    }
+
+                    ToolbarIcon.ARROW -> {
+                        navController.navigateUp()
+                    }
+                }
             }
         }
     }
@@ -132,8 +151,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             mainViewModel.toggleMenuVisibility()
 
             when (item.itemId) {
-                R.id.photos_menu_item -> {
-                    mainViewModel.updateMenuSelectedItem(MenuItem.PHOTOS)
+                R.id.images_menu_item -> {
+                    mainViewModel.updateMenuSelectedItem(MenuItem.IMAGES)
                     true
                 }
 
@@ -156,14 +175,30 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun observeMenuItemState() {
-        val navHostFragment =
-            childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.commentFragment -> {
+                    binding.fab.visibility = View.GONE
+                    binding.mainToolbar.navigationIcon =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_back)
+
+                    mainViewModel.updateToolbarIconState(ToolbarIcon.ARROW)
+                }
+
+                else -> {
+                    binding.fab.visibility = View.VISIBLE
+                    binding.mainToolbar.navigationIcon =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.ic_menu)
+
+                    mainViewModel.updateToolbarIconState(ToolbarIcon.MENU)
+                }
+            }
+        }
 
         lifecycleScope.launch {
             mainViewModel.menuItemState.collect { item ->
                 when (item) {
-                    MenuItem.PHOTOS -> navController.navigate(R.id.photoFragment)
+                    MenuItem.IMAGES -> navController.navigate(R.id.imageFragment)
                     MenuItem.MAP -> navController.navigate(R.id.mapFragment)
                 }
             }
@@ -239,6 +274,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun updateLoadingVisibility(visible: Boolean) {
+        binding.shadowView.isVisible = visible
         binding.progressIndicator.isVisible = visible
     }
 

@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.2"
 datastorePreferences = "1.1.1"
+glide = "4.16.0"
 javaxInject = "1"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
@@ -12,6 +13,7 @@ kotlinxCoroutinesCore = "1.9.0"
 kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.7.3"
 lifecycleViewmodelKtx = "2.8.6"
+mapsMobile = "4.8.0-lite"
 material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
@@ -27,6 +29,7 @@ kotlinxSerializationConverter = "2.11.0"
 retrofitAdaptersResult = "1.0.12"
 room = "2.6.1"
 ksp = "2.0.0-1.0.23"
+safeArgs = "2.8.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,7 +45,9 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+maps-mobile = { module = "com.yandex.android:maps.mobile", version.ref = "mapsMobile" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
@@ -78,3 +83,4 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "safeArgs" }

@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import com.yandex.mapkit.MapKitFactory
 import dev.balinapp.databinding.ActivityMainBinding
 import dev.balinapp.di.ViewModelFactory
 import dev.balinapp.ui.auth.TokenViewModel
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         (application as BalinApp).getAppComponent().inject(this)
+        setupMapKit()
 
         enableEdgeToEdge()
 
@@ -49,6 +51,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupMapKit() {
+        MapKitFactory.setApiKey(BuildConfig.MAP_API_KEY)
+        MapKitFactory.initialize(this)
+    }
+
     private fun setupSystemBars() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -65,5 +72,10 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToMainFragment() {
         val navController = findNavController(R.id.fragment_container)
         navController.navigate(R.id.action_authFragment_to_mainFragment)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        MapKitFactory.getInstance().onStop()
     }
 }

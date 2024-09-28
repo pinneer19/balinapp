@@ -3,6 +3,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="colorPrimary">@color/green</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/light_blue</item>
     </style>
     <style name="Theme.BalinApp" parent="Base.Theme.BalinApp"/>
 </resources>

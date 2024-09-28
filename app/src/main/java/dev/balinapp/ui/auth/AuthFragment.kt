@@ -24,7 +24,8 @@ import javax.inject.Inject
 
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
-    private lateinit var binding: FragmentAuthBinding
+    private var _binding: FragmentAuthBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -44,9 +45,9 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAuthBinding.inflate(inflater, container, false)
-        return binding.root
+    ): View? {
+        _binding = FragmentAuthBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +92,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun updateLoadingVisibility(visible: Boolean) {
+        binding.shadowView.isVisible = visible
         binding.loadingIndicator.isVisible = visible
     }
 
@@ -123,6 +125,11 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = fragmentList[position].second
         }.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

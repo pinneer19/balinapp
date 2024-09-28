@@ -1,4 +1,4 @@
-package dev.balinapp.ui.main
+package dev.balinapp.ui.map
 
 import androidx.fragment.app.Fragment
 import dev.balinapp.R

@@ -20,6 +20,9 @@ interface ImageDao {
     @Insert
     suspend fun insertAll(imageEntityList: List<ImageEntity>)
 
+    @Insert
+    suspend fun insertImage(imageEntity: ImageEntity)
+
     @Query("SELECT * FROM images")
     fun imagePagingSource(): PagingSource<Int, ImageEntity>
 

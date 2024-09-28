@@ -64,12 +64,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/nav_drawer" />
 
+    <View
+        android:id="@+id/shadowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        android:visibility="gone" />
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progress_indicator"
+        android:id="@+id/progressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:src="@drawable/ic_add"
         android:visibility="gone"
         app:indicatorColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"

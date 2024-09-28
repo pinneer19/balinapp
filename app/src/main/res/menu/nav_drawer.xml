@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/photos_menu_item"
+        android:id="@+id/images_menu_item"
         android:icon="@drawable/ic_person"
-        android:title="@string/photos" />
+        android:title="@string/images" />
 
     <item
         android:id="@+id/map_menu_item"

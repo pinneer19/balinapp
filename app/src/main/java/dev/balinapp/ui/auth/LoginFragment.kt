@@ -23,7 +23,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         ownerProducer = { activity as MainActivity }
     ) { factory }
 
-    private lateinit var binding: FragmentLoginBinding
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,9 +35,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
+    ): View? {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,5 +53,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
             authViewModel.login(login, password)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dev.balinapp.domain.model.RequestResult
 import dev.balinapp.domain.model.image.ImageInput
 import dev.balinapp.domain.model.image.ImageOutput
-import dev.balinapp.domain.usecase.UploadPhotoUseCase
+import dev.balinapp.domain.usecase.UploadImageUseCase
 import dev.balinapp.util.LocationClient
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,14 +18,17 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val locationClient: LocationClient,
-    private val uploadPhotoUseCase: UploadPhotoUseCase
+    private val uploadImageUseCase: UploadImageUseCase
 ) : ViewModel() {
 
     private var _menuVisible = MutableStateFlow(false)
     val menuVisible: StateFlow<Boolean> = _menuVisible
 
-    private var _menuItemState = MutableStateFlow(MenuItem.PHOTOS)
+    private var _menuItemState = MutableStateFlow(MenuItem.IMAGES)
     val menuItemState: StateFlow<MenuItem> = _menuItemState
+
+    private var _toolbarIconState = MutableStateFlow(ToolbarIcon.MENU)
+    val toolbarIconState: StateFlow<ToolbarIcon> = _toolbarIconState
 
     private var _requestState = MutableStateFlow<RequestResult<ImageOutput>>(RequestResult.Idle)
     val requestState: StateFlow<RequestResult<ImageOutput>> = _requestState
@@ -55,6 +58,10 @@ class MainViewModel @Inject constructor(
         _menuItemState.value = item
     }
 
+    fun updateToolbarIconState(icon: ToolbarIcon) {
+        _toolbarIconState.value = icon
+    }
+
     fun uploadImage(base64Image: String) {
         val currentDate = Clock.System.now().epochSeconds
 
@@ -67,7 +74,7 @@ class MainViewModel @Inject constructor(
 
         viewModelScope.launch {
             _requestState.emit(RequestResult.InProgress())
-            _requestState.emit(uploadPhotoUseCase(imageInput))
+            _requestState.emit(uploadImageUseCase(imageInput))
         }
     }
 }
