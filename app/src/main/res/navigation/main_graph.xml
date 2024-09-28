@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav.xml"
+    app:startDestination="@id/imageFragment">
+
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="dev.balinapp.ui.images.ImageFragment"
+        android:label="ImageFragment"
+        tools:layout="@layout/fragment_image">
+        <action
+            android:id="@+id/action_imageFragment_to_commentFragment"
+            app:destination="@id/commentFragment"
+            app:popUpTo="@id/commentFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="dev.balinapp.ui.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="dev.balinapp.ui.comments.CommentFragment"
+        android:label="CommentFragment"
+        tools:layout="@layout/fragment_comment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="long" />
+    </fragment>
+</navigation>
