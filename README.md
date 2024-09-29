@@ -1,3 +1,5 @@
+[**APK Download link**](https://drive.google.com/file/d/1Wyr6_69hgOX-XrX21j5J5ZiWJG_3sxSu/view?usp=sharing)
+
 **Для работы с базой данных использовать ORM. Осознанно выбрать нужную и объяснить, <br>
   почему Вы  выбрали именно её**
 
